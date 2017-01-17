@@ -7,6 +7,10 @@
 
 from flask import Flask, render_template, request, url_for
 from flask.ext.api import FlaskAPI, status, exceptions
+import os, sys
+import json
+import subprocess
+
 
 app = Flask(__name__)
 
@@ -22,7 +26,70 @@ def management():
 def monitoring():
 	return render_template('monitoring.html')
 
+@app.route('/workspace-list', methods = ['GET'])
+def api_workspaceList():
+	path = "/home/bobby"
 
+	dirs = os.listdir(path)
+
+	catkin_ws_array = []
+
+	#	Loops through directories in path
+	for directory in dirs:
+
+		#	Avoids files like .local, etc
+		if directory[0] != ".":
+			print "Directory: ", directory
+
+			#	Creates path to directory to be searched
+			temp_path = path + "/" + directory
+
+			#	Checks if path leads to directory
+			if os.path.isdir(temp_path):
+
+				#	Gets directories in temp_path
+				childDirectories = os.listdir(temp_path)
+
+				#	Loops through directories in childDirectories
+				#		searching for .catkin_workspace
+				for grandChildDirectory in childDirectories:
+					if grandChildDirectory == ".catkin_workspace":
+						print "Found workspace"
+
+						#	Adds directory name to array to be used later in WebApp
+						catkin_ws_array.append(directory)
+						break
+
+
+	#	Logs discovered catkin_workspaces
+	for ws in catkin_ws_array:
+		print "Workspace: ", ws
+
+	return json.dumps(catkin_ws_array)
+
+@app.route('/create-workspace', methods = ['POST'])
+def api_createWorkspace():
+	event_data = request.get_json(force=True)
+
+	ws_name = event_data["workspaceName"]
+
+	ws_path = "/home/bobby/" + ws_name
+	path_w_src = ws_path + "/src"
+	# path_w_pkg = path_w_src + 
+
+	if not os.path.isdir(ws_path):
+		os.makedirs(path_w_src)
+		cmd = "mkdir my_ws"
+		a = subprocess.Popen(["catkin_init_workspace"], cwd=path_w_src, shell=True)
+		a.wait()
+		# a.kill()
+		b = subprocess.Popen(["catkin_make"], cwd=ws_path, shell=True)
+		b.wait()
+		# b.kill()
+		subprocess.Popen(["source", "devel/setup.bash"], cwd=ws_path, shell=True)
+		# subprocess.Popen(["catkin_create_pkg " + pkg_name], cwd=path_w_src, shell=True)
+
+	return json.dumps(event_data)
 
 
 

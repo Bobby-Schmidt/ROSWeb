@@ -7,6 +7,33 @@
 
 function populateWorkspaces() {
 	console.log('populateWorkspaces');
+
+	workspaceSelect = document.getElementById('selectWorkspaces');
+
+	// Clears options prior to population; avoids duplicates
+	workspaceSelect.options.length = 0;
+
+	$.ajax({
+		url: "http://127.0.0.1:5000/workspace-list",
+		type: "GET",
+		// data: JSON.stringify(trendRequestModel),
+		dataType: 'json',
+		success: function(response) {
+			var jsonData = response;
+			// initPlot(jsonData);
+			console.log('jsonData: ', jsonData);
+
+			for (var i = 0; i < jsonData.length; i++) {
+				// console.log(jsonData[i]);
+				workspaceSelect.innerHTML += "<option>" + jsonData[i] + "</option>"
+
+			}
+
+		},
+		failure: function() {
+			console.log('GET Failed');
+		}
+	});
 }
 
 
@@ -17,22 +44,7 @@ function populatePackages() {
 
 	console.log('selectedWorkspaces: ', selectedWorkspaces);
 
-	// $.ajax({
-	// 	type: "POST",
-	// 	// url: "http://192.168.0.16:5000/players/list",
-	// 	url: "http://127.0.0.1:5000/players/list",
-	// 	// url: "http://10.10.55.18:5000/games/list",
-	// 	data: JSON.stringify(trendRequestModel),
-	// 	// "url": "http://192.168.1.14:5000/teams-list",
-	// 	dataType: 'json',
-	// 	success: function(response) {
-	// 		var jsonData = response;
-	// 		initPlot(jsonData);
-	// 	},
-	// 	failure: function() {
-	// 		console.log('POST Failed');
-	// 	}
-	// });
+
 
 }
 
@@ -40,8 +52,28 @@ function populatePackages() {
 function createWorkspace() {
 	console.log('createWorkspace');
 
-	var workspaceName = document.getElementById('wsName').value;
-	console.log('workspaceName: ', workspaceName);
+	var newWorkspace = document.getElementById('wsName').value;
+
+	var workspaceNameJson = {
+		workspaceName: newWorkspace
+	}
+
+	$.ajax({
+		url: "http://127.0.0.1:5000/create-workspace",
+		type: "POST",
+		data: JSON.stringify(workspaceNameJson),
+		dataType: 'json',
+		success: function(response) {
+			// var jsonData = response;
+			console.log('success');
+			populateWorkspaces();
+		},
+		failure: function() {
+			console.log('failure');
+		}
+	});
+
+	console.log('workspaceName: ', newWorkspace);
 
 }
 
