@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<!-- Material Design fonts -->
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+		<!-- Bootstrap -->
+		<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<!-- Bootstrap Material Design -->
+		<link rel="stylesheet" type="text/css" href="static/css/bootstrap-material-design.css">
+		<link rel="stylesheet" type="text/css" href="static/css/ripples.min.css">
+		<script src="static/js/jquery-3.1.1.min.js"></script>
+		<script src="static/js/bootstrap.min.js"></script>
+		<script src="static/js/material.min.js"></script>
+		<script src="static/js/ripples.min.js"></script>
+		
+	</head>
+	<body style="background-color: #e6ebed">
+		<div class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index">ROSWeb</a>
+				</div>
+				<div class="navbar-collapse collapse navbar-responsive-collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="management">ROS Management</a></li>
+						<li><a href="monitoring">System Monitoring</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<h2>ROS Management</h2>
+
+	<div class="container row">
+		<label for="selectWorkspaces" class="col-md-1 control-label">Select Workspace</label>
+		<form class="form-horizontal col-md-4">
+			<fieldset>
+	        <select id="selectWorkspaces" multiple="" class="form-control">
+	          <option>Workspace_1</option>
+	          <option>Workspace_2</option>
+	          <option>Workspace_3</option>
+	          <option>Workspace_4</option>
+	          <option>Workspace_5</option>
+	        </select>
+	    </fieldset>
+		</form>
+
+		<label for="selectPackages" class="col-md-1 col-md-offset-1 control-label">Select Packages</label>
+		<form class="form-horizontal col-md-4">
+			<fieldset>
+	        <select id="selectPackages" multiple="" class="form-control">
+	          <option>Package_1</option>
+	          <option>Package_2</option>
+	          <option>Package_3</option>
+	          <option>Package_4</option>
+	          <option>Package_5</option>
+	        </select>
+	    </fieldset>
+		</form>
+	</div>
+
+	<div class="row">
+		<a href="javascript:void(0)" class="btn btn-raised btn-info col-md-4 col-md-offset-2">Populate Package Selection</a>
+	</div>
+
+
+		<div class="container row">
+			<div class="panel-group">
+				<div class="panel panel-default col-md-6">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" href="#collapse1"><center>Create Workspace</center></a>
+						</h4>
+					</div>
+					<div id="collapse1" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="form-group ">
+								<h4>Create Workspace</h4>
+								<div class="form-group label-floating">
+									<label class="control-label" for="focusedInput1">Enter Catkin Workspace Name</label>
+									<input class="form-control" id="wsName" type="text">
+								</div>
+							</div>
+						</div>
+						<a href="javascript:void(0)" class="btn btn-raised btn-primary col-md-8 col-md-offset-2">Create Workspace</a>
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="container row">
+			<div class="panel-group">
+				<div class="panel panel-default col-md-6">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" href="#collapse2"><center>Create Package</center></a>
+						</h4>
+					</div>
+					<div id="collapse2" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="form-group ">
+								<h4>Create Package</h4>
+								<div class="form-group label-floating">
+									<label class="control-label" for="focusedInput2">Enter ROS Package Name</label>
+									<input class="form-control" id="pkgName" type="text">
+								</div>
+							</div>
+						</div>
+						<a href="javascript:void(0)" class="btn btn-raised btn-primary col-md-8 col-md-offset-2">Create Package</a>
+						
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
