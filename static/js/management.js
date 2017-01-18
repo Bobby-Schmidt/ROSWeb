@@ -2,7 +2,7 @@
 * @Author: bobby
 * @Date:   2017-01-17 11:41:07
 * @Last Modified by:   Bobby-Schmidt
-* @Last Modified time: 2017-01-17 12:10:10
+* @Last Modified time: 2017-01-18 00:08:58
 */
 
 function populateWorkspaces() {
@@ -81,3 +81,37 @@ function createWorkspace() {
 function createPackage() {
 	console.log('createPackage');
 }
+
+function pythonUpload() {
+	console.log('pythonUpload');
+
+
+	
+
+	// $.ajax({
+	// 	url: "http://127.0.0.1:5000/py-upload",
+	// 	type: "POST",
+	// 	// data: JSON.stringify(workspaceNameJson),
+	// 	dataType: 'json',
+	// 	success: function(response) {
+	// 		// var jsonData = response;
+	// 		console.log('success');
+	// 		// populateWorkspaces();
+	// 	},
+	// 	failure: function() {
+	// 		console.log('failure');
+	// 	}
+	// });
+
+}
+
+// $(function() {
+	// $('#inputFile').on('change', ':file', function() {
+	// 	console.log('file change');
+	// 	var input = $(this),
+	// 	    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+	// 	    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+	// 	input.trigger('fileselect', [numFiles, label]);
+	// });
+// })
+

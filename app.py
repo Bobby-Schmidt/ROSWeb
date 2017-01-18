@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # @Author: bobby
 # @Date:   2017-01-16 11:05:51
-# @Last Modified by:   bobby
-# @Last Modified time: 2017-01-16 21:15:20
+# @Last Modified by:   Bobby-Schmidt
+# @Last Modified time: 2017-01-18 00:31:33
 
 
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from flask.ext.api import FlaskAPI, status, exceptions
+from flask.ext.uploads import UploadSet, configure_uploads, SCRIPTS
 import os, sys
 import json
 import subprocess
@@ -14,12 +15,28 @@ import subprocess
 
 app = Flask(__name__)
 
+scripts = UploadSet('scripts', SCRIPTS)
+
+app.config['UPLOADED_SCRIPTS_DEST'] = 'static/temp'
+configure_uploads(app, scripts)
+
+# UPLOAD_FOLDER = 'Users/bobby/ROSWeb/upload_target'
+# ALLOWED_EXTENSIONS = set(['py'])
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 @app.route('/index')
 def index():
 	return render_template('index.html')
 
-@app.route('/management')
+@app.route('/management', methods = ['GET', 'POST'])
 def management():
+	if request.method == 'POST' and 'script' in request.files:
+		# Insert code here
+		filename = scripts.save(request.files['script'])
+		return render_template('management.html')
+		# print 'POST request received'
+
+
 	return render_template('management.html')
 
 @app.route('/monitoring')

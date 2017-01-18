@@ -114,8 +114,27 @@
 								</div>
 							</div>
 						</div>
+
+						<form method=POST enctype=multipart/form-data action="{{ url_for('management') }}">
+							<input type=file name=script>
+							<input type=submit>
+						</form>
+ 					    <!-- <div class="form-group">
+					      <label for="inputFile" class="col-md-2 control-label">File</label>
+
+					      <div class="col-md-10">
+					        <input type="text" readonly="" class="form-control" placeholder="Browse...">
+					        <input type="file" id="inputFile" multiple="">
+					      </div>
+					    </div> -->
+					    <!-- <a onclick="pythonUpload()" id="pythonUploadBtn" class="btn btn-raised btn-primary col-md-2 col-md-offset-2">Upload Code</a> -->
+
+
+
+				<!-- 	    <div class="row">
 						<a onclick="createPackage()" class="btn btn-raised btn-primary col-md-8 col-md-offset-2">Create Package</a>
-						
+					</div>
+ -->						
 					</div>
 					
 				</div>
